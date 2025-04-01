@@ -1,0 +1,170 @@
+HTML
+0. 에디터 설치
+
+1. 정의
+HTML(Hyper Text Markup Language)
+
+1) Hyper Text : 다른 페이지로 이동할 수 있는 기술 
+2) Markup Language : 태그로 구성된 언어
+3) 확장자 - html, htm 
+
+2. 기본 구조
+<!DOCTYPE html> : HTML 문서의 버전(HTML5 버전) 
+<html>
+	<head></head> : 보이지 않는 부분을 주로 정의, 사이트의 자원, 정보 주로 정의
+	<body></body> : 보이는 부분을 주로 정의 
+</html>
+
+3. HTML 태그(요소)
+	태그
+	<태그명>내용</태그명>
+    (여는 태그)      (닫는 태그)
+	
+	
+	<태그명 /> : 단일 태그 - 내용이 없는 태그(출력 용도가 X)
+		예) <meta />
+			
+			-> /는 생략 가능  <태그명> 예) <meta>
+			
+
+4. 태그 
+5. 주석(Comments)
+	<!-- 설명 --> : 브라우저가 출력 X 
+	1) 설명, 주해 
+	2) 특정 태그의의 출력 배제 
+	
+6 태그 정리
+1) HTML 링크(Links)
+	a 
+		href  : 이동할 경로(URL - Uniform Resource Locator) 
+		target : 웹페이지를 보여줄 창
+				- _self : 현재 창 (기본값) 
+				- _blank : 새로운 창
+				- _parent : 부모창
+				_ _top: 가장 상위에 있는 창
+				- 창의 이름 : 부모창에서 지정된 이름의 자식창으로 이동 
+				
+	iframe : 웹 문서에 포함할 수 있는 브라우저 창 - 자식 창으로 사용되는 경우가 많다.
+			- src : 웹 페이지의 경로(URL) 
+			- width : 창의 너비 
+			- height : 창의 높이
+			- name : 창의 이름
+	
+2) 경로 
+	절대경로 
+		: 전체 경로
+		
+	상대경로
+		: 경로 기준 - 브라우저 출력되는 문서의 경로 
+		예) file:///C:/Users/admin/Desktop/이용교/02 프론트앤드 프로그래밍/html/ : 기준 경로
+			
+			이미지 경로 
+			file:///C:/Users/admin/Desktop/이용교/02 프론트앤드 프로그래밍/html/images/logo.png
+			
+			
+			ex06.html
+			file:///C:/Users/admin/Desktop/이용교/02 프론트앤드 프로그래밍/html/sub/ex06.html
+			file:///C:/Users/admin/Desktop/이용교/02 프론트앤드 프로그래밍/html/sub/ - 기준경로 
+			file:///C:/Users/admin/Desktop/이용교/02 프론트앤드 프로그래밍/html/sub/../images/logo.png
+			--> ../images/logo.png 
+			
+	참고)
+		. : 현재 경로 
+		.. : 상위 경로 
+		
+3) 테이블
+	- 표를 구성하는 태그 
+	<table>
+		<thead> : 테이블 컬럼 영영
+			<tr> : 행 
+				<th>항목1</th>
+				<th>항목2</th>
+				...
+			</tr>
+		</thead>
+		<tbody>
+			<tr> : 행
+				<td>값1</td>
+				<td>값2</td>
+				...
+			</tr>
+		</tbody>
+		<tfoot> : 표에 대한 요약 정보 ..
+		
+		</tfoot>
+	</table>
+		
+	th, td 
+		- colspan : 열병합 
+						colspan='3' -> 3개의 칸을 하나의 칸으로 합친다.
+		- rowspan : 행병합 
+						rowspan='3' -> 3개의 행 칸을 하나의 칸으로 합친다.
+		
+		- align : left  - 왼쪽 정렬(기본값) 
+				   right - 오른쪽 정렬
+				   center - 가운데 정렬 
+				   
+		- valign: top - 위쪽으로 정렬
+					bottom - 아래쪽으로 정렬
+					middle - 가운데(수직) 정렬
+		
+4) 리스트 - 목록
+	ul (UnOrdered List) : 목록 순서를 표기하지 않는 태그
+		- css 속성 list-style-type : disc - 기본값, 채워진 둥근 점 
+										  circle - 채워지지 않은 둥근 점 
+										  square - 사각형 모양
+										  none - 구분 아이콘  X
+				  
+		li (List Item) : 목록 항목 
+		
+	ol (Ordered List) : 목록 순서를 표기하는 태그
+		- type : 1 - 기본값, 숫자로 순서 표기 
+		          a - 소문자 a,b,c ... 순서로 표기 
+				  A - 대문자 A,B,C .. 순서대로 표기
+				  i - 소문자 로마자로 표기 i, ii, iii 
+				  I - 대문자 로자자로 표기
+		li 
+	
+	dl (Description List) : 설명 목록, 항목명, 항목 값
+		dt : 항목명
+		dd : 항목 값
+		
+5) 이미지
+	<img>
+		- src : 이미지 경로 
+		- width : 이미지의 너비
+		- height : 이미지의 높이
+		- 너비, 높이를 함께 설정하면 이미지의 왜곡이 발생할 가능성이 높다. 
+		- 너비, 높이 중에서 한가지 기준으로 설정하는게 좋다!
+		- alt: 대체 텍스트 (이미지가 출력될 수 없는 경우 대신 출력되는 문자) 
+		
+7. Block & Inline 태그
+1) Block 태그 : 문단을 표현하는 태그 
+	예) p, div, form ... 태그 
+	- 태그와 태그 사이에 줄개행 
+	- 너비, 높이를 스타일로 지정 가능 
+	
+2) Inline 태그 : 문장을 표현하는 태그 
+	예) a, span, i, ..  태그
+	- 태그와 태그 사이에 줄개행 하지 않음 
+	- 너비, 높이를 스타일로 지정 불가
+	
+
+8. HTML 속성(attributes)			
+9. meta 태그 
+
+10. 시멘틱 요소(태그)
+	- 의미가 있는 태그 
+	- 태그명만 봐도 어떤 태그인지 알수 있는 태그 
+	
+	<table>~</table> : 표를 만드는 태그
+	
+	<header>
+	<nav>
+	<section>
+	<main>
+	<article>
+	<footer> ...
+	
+11. 엔티티 문자 : 예약되어 있는 문자 표기 
+12. 양식 태그(form)
