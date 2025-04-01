@@ -166,5 +166,65 @@ HTML(Hyper Text Markup Language)
 	<article>
 	<footer> ...
 	
-11. 엔티티 문자 : 예약되어 있는 문자 표기 
+11. 엔티티 문자 : 예약되어 있는 문자 표기
+    - &nbsp; - 공백 문자 한개
+	- &lt; - <
+	- &gt; - > 
 12. 양식 태그(form)
+form
+	속성
+		action : 양식을 처리할 제출 경로(서버쪽 URL)
+		method : 처리방식 - GET(기본값), POST, PUT, PATCH, DELETE, OPTIONS, HEAD
+
+	input 태그
+		type - text : 한줄 텍스트(기본값)
+			 - password : 비밀번호 입력 텍스트(감춤 처리)
+			 - radio : 여러개 중에서 한개를 선택, name 속성으로 선택 그룹을 묶는다.
+			 	ㄴ label 태그로 감싸면 텍스트를 클릭해도 선택이 된다.
+				ㄴ checked : 선택된 상태로 변경
+			 - checkbox : 여러개 중에서 여러개를 선택한다.
+			 - submit : 양식 제출 버튼
+			 	ㄴ button 태그로도 교체 가능
+			 - reset, button
+			 - number : 숫자만 입력 가능
+			 - email : 이메일 형식의 문자만 입력 가능, 형식이 맞지 않으면 양식 제출 불가
+			 - date : 날짜 형식으로 입력 받는 경우, 선택할 수 있는 달력이 노출
+			 - time : 시간 형식
+			 - datetime : 날짜와 시간
+			 - range : 범위 선택
+			 	ㄴ max: 최대값, min : 최소값, step : 증감 단위
+			 - color : 색상 선택
+			 - hidden : 사용자가 입력하는 입력 항목이 아니다. 양식에 고정해서 서버에 전달하는 값
+			 - file : 파일 선택, 클릭시 파일 탐색기가 노출
+			 	ㄴ accept="image/*" : 이미지 형식의 파일만 선택 가능 제한
+				ㄴ multiple : 파일 여러개 선택 가능
+				
+		value : 값을 설정. 사용자가 입력하는 태그인 경우는 입력값이 자동으로 value로 설정
+		name : 전송할 데이터의 항목명, 없으면 데이터의 전송과 수신이 불가
+		required : 양식을 제출할때 필수로 요구되는 항목
+		readonly : 읽기전용. 사용자가 직접 입력X. 데이터 전송 가능
+		disabled : 입력 불가 처리. 데이터 전송 불가
+		placeholder : 입력 값이 없는 경우 대체 안내 문구
+		minlength : 최소 길이 한정
+		maxlength : 최대 길이 한정
+
+	button
+		type - submit : 기본 값, 양식 제출
+			 - reset : 입력 항목 초기화
+			 - button : 일반적인 버튼
+
+	textarea : 여러줄 텍스트를 입력받는 경우
+		- rows : 행의 갯수
+		- cols : 열의 갯수
+
+	select : 여러개 항목중에서 한개 또는 그 이상을 선택할때
+		속성:
+			- multiple : 여러개 선택 가능
+			- size : 한번에 보이는 항목 갯수
+		- option : 선택항목
+			ㄴ selected : 선택 처리		
+
+참고) 
+	대상을 특정하기 위한 용도로 사용되는 속성
+	id : 대상 한개를 특정하기 위한 속성
+	class

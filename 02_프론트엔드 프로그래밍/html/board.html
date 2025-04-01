@@ -1,0 +1,66 @@
+<!-- 
+ ::::::::::::::::::::::::::::::::::::
+ 게시글 작성 양식 - board.html
+ 1. 입력 항목
+    분류(Q&A, Buy&Sell, Freetalk)
+    제목, 작성자, 내용
+    이미지 첨부(이미지 형식으로 제한)
+    파일 첨부(파일 형식의 제한 X)
+
+2. 양식 처리 방식 - POST
+3. 양식 처리 URL - board_ps.html
+::::::::::::::::::::::::::::::::::::
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>게시글 작성 양식</title>
+    </head>
+    <body>
+        <h1>게시글 작성</h1>
+        <form action="./board_ps.html" method="POST">
+            <dl>
+                <dt>분류</dt>
+                <dd>
+                    <select name="division">
+                        <option value="qna">Q&AMP;A</option>
+                        <option value="buynsell">Buy&Sell</option>
+                        <option value="freetalk">Freetalk</option>
+                    </select>
+                </dd>
+            </dl>
+            <dl>
+                <dt>제목</dt>
+                <dd><input type="text" name="title" required></dd>
+            </dl>
+            <dl>
+                <dt>작성자</dt>
+                <dd>
+                    <input type="text" name="userName" required>
+                </dd>
+            </dl>
+            <dl>
+                <dt>내용</dt>
+                <dd>
+                    <textarea name="context" cols="50" rows="10" required placeholder="내용..."></textarea>
+                </dd>
+            </dl>
+            <dl>
+                <dt>이미지 첨부</dt>
+                <dd>
+                    <input type="file" name="imgAtc" accept="image/*" multiple>
+                </dd>
+            </dl>
+            <dl>
+                <dt>파일 첨부</dt>
+                <dd>
+                    <input type="file" name="fileAtc" multiple>
+                </dd>
+            </dl>
+            
+            <button type="reset">다시입력</button>
+            <button type="submit">작성완료</button>
+        </form>
+    </body>
+</html>
