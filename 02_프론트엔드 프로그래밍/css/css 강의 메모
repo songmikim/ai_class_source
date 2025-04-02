@@ -123,18 +123,99 @@ CSS
 - 대략 250개 속성이 있다.
 
 1. 폰트
-    font-size : 폰트 사이즈
+    1) font-size : 폰트 사이즈
         ㄴ 고정 사이즈 
             ex) px : 픽셀(화소), pt...
-        ㄴ 상대 사이즈
-            ex) rem, em
- 
+        ㄴ 상대 사이즈 - 기준!!
+            ex) rem - 가장 상위 태그에 정의된 폰트 사이즈가 기준(1rem)
+                em - 부모 태그에 정의된 폰트 사이즈가 기준(1em)
+    2) color - 폰트 색상
+        : 색상명(red, orange, gray, pink,...)
+        : rgb(255,255,255)
+            ㄴ 트루 컬러
+        
+        : rgba(255,255,255,1)
+            ㄴ a : 알파 채널, 투명도(1에 가까울 수록 불투명, 0에 가까울 수록 투명)
+
+        : 0~9, ABCDEF : 16진수로 r, g, b를 표기하는 방식 - hex code
+            ㄴ #FFFFFF
+    
+    3) text-align : 정렬/ 공간의 특징(block 태그)을 가진 태그 내의 텍스트를 정렬
+        ㄴ left : 왼쪽 정렬(기본값)
+        ㄴ right : 오른쪽 정렬
+        ㄴ center : 가운데 정렬
+        ㄴ justify : 양쪽 정렬
+    4) line-height : 행간(행 사이의 간격)
+        ㄴ 배율: 1.2(기본값), 120%
+        ㄴ %
+        ㄴ px, rem ...
+
+    5) word-spacing : 자간(단어 단어 사이 간격)
+        ㄴ px, rem... : 단어 사이의 간격
+        ㄴ wrap(기본값) : 화면 끝에 도달하면 다음줄로 개행
+            - 공백을 통해서 단어 단어를 구분하고 개행
+            - 공백없이 문자를 연속해 입력하는 경우는 개행을 못한다!
+            - 예) 111111111111111111111
+            - word-break: break-all;
+        ㄴ nowrap : 줄개행X, 한줄로 문장을 출력
+
+    6) letter-spacing : 문자 사이의 간격
+
+    7) font-weight : 폰트의 두께
+        ㄴ normal(기본값 - 400), bold(700), extrabold(800~900)
+        ㄴ 숫자(100~900) / 폰트마다 지원 범위가 다르다, 확인이 필요!
+
+    8) font-family : 폰트의 종류(글꼴)
+        font-family: 메인 글꼴, 대체 글꼴, 대체 글꼴...;
+            ㄴ 폰트명이 여러개의 단어로 구성된 경우, 작은 따옴표 또는 큰 따옴표로 감싸준다!
+            
+        예) font-family: "SpoqaHanSansNeo",apple-system,"Apple SD Gothic Neo","맑은 고딕",sans-serif;
+
+        시스템 폰트 : OS에 기본 설치된 폰트
+        웹폰트 : 웹상에서 공유하는 폰트, 플랫폼에 상관없이 동일한 폰트 적용 가능
+
 2. 공간
+    block 레벨 요소
+        ㄴ 공간을 차지한다.
+        ㄴ 너비(너비를 지정하지 않으면 100%), 높이 지정 가능
+        ㄴ 줄개행
+        ㄴ 내부 여백 모든 방향 적용 가능(상하좌우) - padding
+        ㄴ 외부 여백 모든 방향 적용 가능(상하좌우) - margin
+
+    inline 레벨 요소
+        ㄴ 공간을 차지하지 X 
+        ㄴ 너비, 높이 지정 X 
+        ㄴ 줄개행X
+        ㄴ b, i, a, span... 
+        ㄴ 내부 여백 모든 방향 적용 가능(상하좌우) - padding
+        ㄴ 외부 여백은 좌우 방향만 적용 가능 - margin
+
+        1) display: inline -> inline 레벨로 변경
+                    block  -> block  레벨로 변경
+                    inline-block -> inline 속성(줄개행X)과 block 속성(너비, 높이, 외부 여백, 중첩된 여백은 X)을 함께 가지는 특징
+                    table : 표 처럼 배치하는 경우
+                        + table-cell
+                    none : 화면에 보이지 않음. 공간을 차지하지 X.
+                        참고)
+                            visibility: visible - 기본값, 화면에 출력
+                                        hidden - 화면에서 감춤. 요소의 공간을 차지함.  
+
 3. 레이아웃
+    1) box-sizing : 너비, 높이를 결정하는 기준 설정
+        ㄴ content-box(기본값) : 너비와 높이의 기준이 내용영역
+        ㄴ border-box : 너비와 높이의 기준이 경계선
+        
 4. 포지션
 5. float
 6. margin
+    - 외부 여백
+        ㄴ margin: 10px; -> 상하좌우 10px 외부 여백 적용
+        ㄴ margin: 10px 20px; -> 상하, 좌우
+        ㄴ margin: 10px 20px 30px; -> 상, 좌우, 하
+        ㄴ margin: 10px 20px 30px 40px; 상, 우, 하, 좌
 7. padding
+    - 내부 여백
+
 8. media query
 
 9. 그래픽
