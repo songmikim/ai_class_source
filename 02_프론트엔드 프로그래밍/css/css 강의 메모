@@ -288,13 +288,88 @@ CSS
     background-color : 배경색  - 색상명, rgb(...), rgba(...), hex code(#f00)
     background-image : 이미지를 배경으로 설정
         ㄴ url(이미지 경로)
+    
     background-repeat : 배경 이미지 반복 출력 설정
         ㄴ repeat(기본값) : 상하,좌우 모두 반복 출력
         ㄴ repeat-x : 좌우 반복 출력
         ㄴ repeat-y : 상하 반복 출력
         ㄴ no-repeat : 반복 없이 한반만 출력
 
+    background-position : 배경 이미지 배치 설정
+        ㄴ background-position : 50px 100px; -> 좌 -> 우 50px 이동, 위 -> 아래 100px (px 외에도 다른 단위, 또는 % 지정 가능)
+        ㄴ background-position : center(left | right | center) top(top | bottom | center ); -> 좌우: 가운데, 상단
+    
+    background-size : 배경 이미지의 크기 설정
+        ㄴ background-size : 200px 60px -> 너비 200px, 높이 60px  -> 이미지 왜곡 발생 가능
+            (px 외의 단위도 가능, %도 사용 가능)
+            : 200px -> 너비 200px로 지정, 높이는 자동 결정
+
+        ㄴ background-size: contain; -> 배경이미지가 내용물 안쪽에 모도 보일 수 있게 축소, 확대
+                            cover;   -> 배경이미지가 영역을 꽉 채운다. 비율이 맞지 않는 경우는 일부 영역은 보이지 않는다.     
+    
+    단축 표현법
+    background : 색상 url(이미지경로) 반복 속성(repeat, repeat-x, repeat-y, no-repeat) 배치 위치(left top)
+            ㄴ 색상, url 둘다 정의 가능. 한가지는 필수!!
+
+참고)
+    calc(수식) : 연산 기호 +, /, *, - 를 사용하는 경우 연산기호 좌우는 반드시 공백 띄워주기
+    calc((100% -130px)/2) 
+
 10. overflow
-11. transition
+    : 지정된 영영의 컨텐츠가 영역을 벗어났을때 어떻게 출력할지 설정
+        ㄴ visible(기본값) : 영역을 벗어나도 내용을 출력
+        ㄴ hidden : 영역을 벗어나면 감추기
+        ㄴ scroll : 스크롤바 추가
+        ㄴ auto : 영역을 벗어날때만 스크롤바 추가
+
+    overflow-x : 좌우 스크롤바
+    overflow-y : 상하 스크롤바    
+
+11. transition : 전환 효과, 애니메이션 효과
+    + 가상 클래스 선택자와 함께 많이 쓰인다.
+
+    transition-duration: 숫자s / ms(1000분의 1초)
+    transition-property: 전환될 속성 - 예) width..., all
+    transition-timing-function: 애니메이션 효과, -ease-in-out, linear, ease-in, ease-out
+    transition-delay: 전환 효과 발생전 대기 시간 설정(s, ms)
+
+    단축 표현법
+    transition: 속성(property) 지연시간(duration) 애니메이션 효과(timing-function), 대기시간(delay)
+        ㄴ 속성, 지연시간 필수 !!
+12. opacity : 투명
+    0(투명) ~ 1(불투명)
+
 
 flexbox
+- 배치
+- 배치할 대상의 부모 요소에 display: flex;
+
+flex-direction: 부모 요소에 적용
+    ㄴ row(기본값) : 좌 -> 우 배치
+    ㄴ row-reverse : 우 -> 좌 배치
+    ㄴ colum : 위 -> 아래 배치
+    ㄴ colum-reverse : 아래 -> 위 배치
+
+justify-content : 부모 요소에 적용
+    1) 정렬 - flex-direction: row 기준
+        flex-start : 왼쪽
+        flex-end : 오른쪽
+        center : 가운데
+
+    2) 여백의 분할
+        space-between : 요소가 첫번째, 마지막을 끝에 배치, 여백을 균등하게 할당
+        space-around : 요소 앞, 뒤에 균등한 여백
+        space-evenly : 요소 사이 사이 여백을 균등하게 할당
+
+align-items : 부모 요소에 적용
+    1) 정렬 기준 : flex-direction:row 기준, 상, 하, 가운데 배치하는
+        stretch(기본값) : 요소의 높이를 부모 요소의 높이로 맞춘다.
+        flex-start : 상단 배치
+        flex-end : 하단 배치
+        center : 가운데
+flex-wrap : 부모 요소에 적용
+    nowrap(기본값) : 줄개행X, 한줄에 자식 요소의 크기를 조정
+    wrap : 줄개행 O        
+
+flex-grow : 자식 요소에 적용
+    남아 있는 여백을 지정된 비율 별로 할당

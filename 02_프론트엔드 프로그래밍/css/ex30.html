@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>css_ex27</title>
+    </head>
+    <body>
+        <style>
+            ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                height: 100px;
+                display: flex;
+                background: #ccc;
+                flex-wrap: wrap;
+            }
+
+            li {
+                width: 300px;
+            }
+
+            li:nth-of-type(3n+1){
+                background: red;
+            }
+
+            li:nth-of-type(3n+2){
+                background: blue;
+            }
+            
+            li:nth-of-type(3n){
+                background: green;
+            }
+        </style>
+        <ul>
+            <li>메뉴1</li>
+            <li>메뉴2</li>
+            <li>메뉴3</li>
+            <li>메뉴4</li>
+            <li>메뉴5</li>
+            <li>메뉴6</li>
+            <li>메뉴7</li>
+            <li>메뉴8</li>
+            <li>메뉴9</li>
+            <li>메뉴10</li>
+            <li>메뉴11</li>
+            <li>메뉴12</li>
+            <li>메뉴13</li>
+            <li>메뉴14</li>
+            <li>메뉴15</li>
+            <li>메뉴16</li>
+            <li>메뉴17</li>
+            <li>메뉴18</li>
+        </ul>
+    </body>
+</html>
