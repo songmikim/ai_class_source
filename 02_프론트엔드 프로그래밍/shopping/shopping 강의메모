@@ -1,0 +1,19 @@
+swiper.js : 슬라이드 배너
+
+CDN(Content Delivery Network)
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+팁!!
+- 이미지 기본 여백은 display:block을 설정하면 사라진다.
+
+
+과제
+1. index.html 완성
+2. 로그인페이지 만들기
+
+yonggyo00@kakao.comm
++10점!!
+
+월요일 오전 9시 전까지
