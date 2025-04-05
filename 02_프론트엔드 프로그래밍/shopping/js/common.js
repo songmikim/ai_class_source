@@ -1,5 +1,5 @@
 window.addEventListener("DOMContentLoaded", function(){
-    new Swiper(".main-banner", {
+    new Swiper(".main-slide", {
         navigation: {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",

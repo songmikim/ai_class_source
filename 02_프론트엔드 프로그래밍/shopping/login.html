@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>뉴마커스</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script src="js/common.js"></script>      
+    </head>
+    <body>
+        <!-- https://m.n-mk.net/ -->
+        <!-- 사이트 상단 영역 -->
+        <header>
+            <div class="left">
+                <button type="button" class="more-menu"></button>
+                <button type="button" class="search-btn"></button>
+            </div>
+            
+            <a href="#" class="logo">
+                <img src="images/logo.png" alt="로고">
+            </a>
+            
+            <div class="right">
+                <a href="#">
+                    <img src="images/person.png" alt="회원">
+                </a>
+                <a href="#">
+                    <img src="images/cart.png" alt="장바구니">
+                </a>
+            </div>
+        </header>
+
+        <!-- 메인 컨텐츠 영역 S-->
+        <main>
+            <!-- 페이지 위치 영역 S-->
+            <section class="page-location">
+                <div class="back" ></div>
+                <h2>회원로그인</h2>
+            </section>
+            <!-- 페이지 위치 영역 E-->
+            
+            <!-- 로그인 S -->
+            <section class="login-wrapper">
+                <!-- 회원 로그인 S -->
+                <div class="member_login login-box">
+                    <h3>회원 로그인</h3>
+                    <form action="#" method="post">
+                        <input type="text" name="userId" placeholder="아이디">
+                        <input type="password" name="userPw" placeholder="비밀번호">
+                        <label>
+                            <input type="checkbox" name="saveAutoLogin"> 로그인 유지
+                        </label>
+                        <label>
+                            <input type="checkbox" name="saveId"> 아이디 저장
+                        </label>
+                        <button type="submit">로그인</button>
+                    </form>
+                    <div class="links">
+                        <a href="#">회원가입</a>
+                        <a href="#">아이디찾기</a>
+                        <a href="#">비밀번호찾기</a>
+                    </div>
+                </div>
+                <!-- 회원 로그인 E -->
+
+                <!-- 간편로그인 S -->
+                <div class="sns_login_wrap login-box">
+                    <h3><span class="montserrat">SNS</span>간편 로그인</h3>
+                    <div class="sns_login">
+                        <a href="#"><img src="images/naver_login.png" alt="네이버 아이디 로그인"></a>
+                        <a href="#"><img src="images/kakao_login.png" alt="카카오 아이디 로그인"></a>
+                    </div>
+                </div>
+                <!-- 간편로그인 E -->
+
+                <!-- 비회원 주문조회 S -->
+                <div class="guest_order_box login-box">
+                    <h3>비회원 주문조회</h3>
+                    <p>주문자 이름과 주문 번호를 입력해주세요</p>
+
+                    <form action="#" method="post" >
+                        <input type="text" name="orderNm" placeholder="주문자명" >
+                        <input type="text" name="orderNo" placeholder="주문번호" >
+                        <button type="submit" >주문조회 하기</button>
+                    </form>
+                </div>
+                <!-- 비회원 주문조회 E -->
+            </section>
+        </main>
+        <!-- 메인 컨텐츠 영역 E-->
+
+        <!-- 하단 퀵 버튼 S -->
+        <section class="quick-buttons">
+            <a href="#">
+                <img src="images/top.png" alt="위로 가기">
+            </a>
+            <a href="#">
+                <img src="images/webhard.png" alt="웹하드">
+            </a>
+            <a href="#">
+                <img src="images/kakao.png" alt="카카오톡">
+            </a>   
+        </section>
+        <!-- 하단 퀵 버튼 E -->
+         
+        <!-- 하단 퀵 메뉴 S -->
+        <section class="quick-menu-wrapper">
+            <div class="quick-menu">
+                <button type="button" class="more-menu"></button>
+                <a href="#">
+                    <div class="icon icon1"></div>
+                    <span>구매후기</span>
+                </a>
+                <a href="#">
+                    <div class="icon icon2"></div>
+                    <span>질문과 답변</span>
+                </a>
+                <a href="#">
+                    <div class="icon icon3"></div>
+                    <span>주문/배송</span>
+                </a>
+                <a href="#">
+                    <div class="icon icon4"></div>
+                    <span>로그인</span>
+                </a>
+            </div>
+        </section> 
+        <!-- 하단 퀵 메뉴 E -->
+
+        <!-- 사이트 하단 영역 S -->
+        <footer>
+            <div class="logo">
+                <img src="images/footer_logo.png" alt="하단단로고">
+            </div>
+            <a href="#" class="center_phone montserrat"><img src="images/phone.png" alt="전화">032.765.1884</a>
+            <div class="bank_info">
+                입금정보:기업은행 <span class="montserrat">23117308204011</span>(주)뉴마커스
+            </div>
+            <div class="business_info">
+                <button type="button">(주)뉴마커스 사업자 정보</button>
+            
+                <div class="info">
+                    <dl>
+                        <dt>대표</dt>
+                        <dd>강진석</dd>
+                    </dl>
+                    <dl>
+                        <dt>주소</dt>
+                        <dd>인천광역시 중구 서해대로 498 (주)뉴마커스</dd>
+                    </dl>
+                    <dl>
+                        <dt>사업자등록번호</dt>
+                        <dd class="montserrat">
+                            848-86-01521
+                            <a href="#" class="btn_licensee_info" >사업자번호조회</a>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>통신판매업신고번호</dt>
+                        <dd>제2019-인천미추홀-0184호</dd>
+                    </dl>
+                    <dl>
+                        <dt>문의</dt>
+                        <dd class="montserrat"><a class="email montserrat" href="#">nmarkers@naver.com</a></dd>
+                    </dl>
+                    <dl>
+                        <dt>Fax.</dt>
+                        <dd class="montserrat">032-765-1864</dd>
+                    </dl>
+                </div>
+            </div>
+            
+            <div class="links">
+                <a href="#">회사소개</a>
+                <a href="#">이용약관</a>
+                <a href="#">개인정보처리방침</a>
+                <a href="#">PC버전</a>
+            </div>
+        </footer>
+        <!-- 사이트 하단 영역 E --> 
+        
+    </body>
+</html>
