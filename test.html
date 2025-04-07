@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--DOCTYPE html>
 <html lang='en'>
   <head>
     <meta charset='utf-8' />
@@ -18,4 +18,87 @@
   <body>
     <div id='calendar'></div>
   </body>
+</html-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>localStorage 여러 이미지 저장</title>
+</head>
+<body>
+    <h1>이미지 업로드</h1>
+    <input type="file" id="fileInput" accept="image/*" multiple>
+    <div id="imageContainer"></div> <!-- 이미지가 표시될 영역 -->
+
+    <script>
+        // 페이지 로드 시 저장된 이미지 목록을 불러오기
+        window.onload = function() {
+            displayImages();
+        };
+
+        // 여러 이미지를 화면에 표시하는 함수
+        function displayImages() {
+            const imageContainer = document.getElementById('imageContainer');
+            const storedImages = JSON.parse(localStorage.getItem('storedImages')) || [];
+
+            imageContainer.innerHTML = '';  // 기존 이미지 목록 초기화
+
+            storedImages.forEach((imageData, index) => {
+                const imgElement = document.createElement('img');
+                imgElement.src = imageData;
+                imgElement.style.maxWidth = '150px';
+                imgElement.style.marginRight = '10px';
+
+                // 이미지 삭제 버튼 생성
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = '삭제';
+                deleteButton.onclick = () => deleteImage(index);
+
+                const imageWrapper = document.createElement('div');
+                imageWrapper.appendChild(imgElement);
+                imageWrapper.appendChild(deleteButton);
+
+                imageContainer.appendChild(imageWrapper);
+            });
+        }
+
+        // 파일 선택 시 실행되는 함수
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const files = event.target.files;
+            const storedImages = JSON.parse(localStorage.getItem('storedImages')) || [];
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const reader = new FileReader();
+
+                reader.onloadend = function() {
+                    const base64String = reader.result;
+                    storedImages.push(base64String);
+
+                    // localStorage에 이미지를 저장
+                    localStorage.setItem('storedImages', JSON.stringify(storedImages));
+
+                    // 새로 고침 없이 이미지 목록 갱신
+                    displayImages();
+                };
+
+                reader.readAsDataURL(file);  // Base64로 변환 시작
+            }
+        });
+
+        // 이미지 삭제 함수
+        function deleteImage(index) {
+            const storedImages = JSON.parse(localStorage.getItem('storedImages')) || [];
+            storedImages.splice(index, 1);  // 배열에서 해당 이미지 삭제
+
+            // 삭제된 배열을 다시 localStorage에 저장
+            localStorage.setItem('storedImages', JSON.stringify(storedImages));
+
+            // 이미지 목록 갱신
+            displayImages();
+        }
+    </script>
+</body>
 </html>
