@@ -1,63 +1,15 @@
 객체 
 
-Object : 사물, 대상
-    - 특징 : 변수
-    - 행위 : 함수
-
 1. 객체 리터럴
 - 객체는 이름과 값을 한쌍을 묶은 데이터를 여러개 모은 것
-    ㄴ 이름 : 속성명
-    ㄴ 값 : 속성값
-
 - 객체는 데이터 여러개를 하나로 모은 복합 데이터로 연관배열 또는 사전(Diction) 이라고 부릅니다.
 
 2. 객체 리터럴로 객체 생성하기	
-    {
-        속성명: 값,
-        속성명: 값,
-        ...
-    }
-
-        var person = {
-            name:'이이름',
-            age: 20
-        };
-
-        1) 마침표 연산자(.)
-            person.name;
-
-            - 속성명은 변수명 규칙에 영향을 받는다.
-            - 변수명에 규칙에 위배되는 속성명은 접근 불가
-
-        2) 인덱스 연산자[]
-            person['age'];
-
-            - 변수명 규칙과 상관없이 접근이 가능!
-
-데이터들은 가지고 주로 하는 작업
-    CRUD
-    C - Create : 데이터 생성
-    R - Read   : 데이터 조회
-    U - Update : 데이터 수정
-    D - Delete : 데이터 삭제
-
-3. 프로퍼티(속성) 추가와 삭제
-    추가 : 없는 속성에 값을 대입하면 새로운 속성이 추가
-    삭제 : delete 변수명.속성명;
-
-4. in 연산자로 프로퍼티가 있는지 확인하기
-    속성명이 객체에 존재하는지 체크하는 연산자
-    (논리값)
-    'name' person: person 이 참조하는 객체에 'name' 속성명이 있는지 체크
-
-    for(var key in person){
-        console.log(key);
-    }
-
-    for(var key in person){
-        console.log(key, person[key]);
-    }
+3. 프로퍼티 추가와 삭제
+4. in 연산자로 프로퍼티가 있는지 확인하기	
 5. 메서드	
+	- 함수, 객체에 정의된 함수는 메서드라고 부르기도 한다.
+	
 6. 객체는 참조 타입
 
 함수
@@ -66,10 +18,163 @@ Object : 사물, 대상
 
 
 1. 함수 선언문으로 함수 정의하기
+function 함수이름 (매개변수, ... ) {
+	// 실행할 코드 ...
+	
+	return 반환값;  -> 함수 외부의 변수에 할당할 경우, 함수의 종료 
+}
+
+return 예약어만 사용하는 경우 : 함수를 강제 종료
+
+
 2. 함수 호출			
 3. 함수의 실행흐름
-4. 함수 선언문의 끌어올림
-5. 값으로서의 함수
+
+1) 자바스크립트는 함수는 함수가 아니다!, 함수 객체!
+2) 자바스크립트에서 함수명은 변수명!
+3) 함수 객체는 함수가 아니므로 실행 불가! 
+	-> 실행 가능한 객체로 번역(EC(Execution Context - 실행 문맥 객체)의 평가 과정) **********
+4) EC 객체 -> 실행
+
+
+outer() 호출 
+
+Global EC(Execution Context) {
+	변수 레코드: window 객체의 주소
+						- window.num1 : 10
+	
+	this 바인딩 : window 객체의 주소값
+}
+
+outer EC(Execution Context) {
+	변수 레코드: {
+		num2: 20,
+	}
+	
+	외부 변수 레코드 참조: Global EC의 변수 레코드 주소
+	
+	this 지역변수의 주소값을 결정 : this 바인딩, 함수를 호출해준 객체의 주소
+	
+}
+
+inner EC(Execution Context) {
+	변수 레코드: {
+		num3: 30,
+	}
+	
+	외부 변수 레코드 참조: outer EC의 변수 레코드의 주소
+	
+	this 지역변수의 주소값을 결정 : this 바인딩, 함수를 호출해준 객체의 주소
+}
+
+참고)
+    스킴 : 함수형 언어 
+
+4. <b>함수 선언문의 끌어올림*****</b>
+    호이스팅
+5. 값으로서의 함수 *****
+    1) 함수형 프로그래밍을 가능하게 하는 가장 중요한 특징
+        - 함수가 값으로 사용된다.! : 자바스크립트는 함수가 아니라 함수 객체이므로 변수에 할당 가능한 값으로 사용 가능!
+    2) 일등 함수
+        - 변수와 함수를 동등하게 취급한다.
+    3) 함수형 프로그래밍
+        - 함수를 매개변수로 사용 *****
+            : 함수가 사용자 정의 기능으로 사용
+            : 일회용으로 사용하는 함수로 주로 사용
+
+        function outer(callback){
+            callback();
+        }
+        function inner(){
+            console.log("inner");
+        }
+        outer(inner); 
+
+
+        - 함수를 반환값으로 사용 *****
+            : 팩토리 함수로 사용, 특정 값을 고정해서 새로운 함수를 생성
+            : 클로져(closure) - 자유변수가 반환된 함수내로 속박된 상태, 내부에 있는 변수의 값이 계속 유지가되는 상태
+            : 고차함수 -> 함수의 함수를 반환하는 함수!
+
+            function add(num1){
+                return function (num2){
+                    return num1 + num2; // num2 - 속박변수, num1 -  자유변수
+                }
+            }
+
+            const result = add(10);
+            add(20);
+            >>> 30
+            ===========================
+            const result = add(10)(20);
+            >>> 30
+
+            ===========================
+            const add = x => y => x + y ;
+
+
+        - 함수내에 함수를 정의하는 것
+
+    4) 화살표 함수
+        - 용도가 제한적인 상황(매개변수, 반환값 - 일회용 객체, 사용자 정의 기능)에서 간단하게 형식을 축소해서 사용하는 함수
+
+            function add(num1, num2){
+                retrun num1 + num2 ; 
+            }
+            ======================
+            const add = (x, y) => x + y;
+
+            1) function 예약어와 함수명 생략
+            2) 매개변수 정의부와 구현체({...}) 사이에 => 추가합니다.
+            3) 구현 코드가 1줄로 되어 있는 경우 {...}와 retrun 예약어를 생략 할 수 있다.
+            4) 변수명도 1자로 축약하는 것이 관례
+            5) 매개변수가 1개이면 (..)도 생략 가능
+            6) 매개변수가 없는 경우 (..) 생략 불가
+            
+            - 기능적인 제한조건도 있다.
+                ㄴ this의 값은 화살표 함수를 정의하는 시점에 확실하게 결정된 this 값으로 결정
+
+                const person = {
+                    name : '이이름',
+                    age: 40,
+                    showInfo: function () {
+                        console.log("this", this);
+                    }
+                };
+                person.showInfo();
+                >>
+                this > {name: '이이름', age: 40, showInfo: ƒ}
+
+                ==============================
+                const person = {
+                    name : '이이름',
+                    age: 40,
+                    showInfo: () => {
+                        console.log("this", this);
+                    }
+                };
+                person.showInfo();
+                >>
+                this Window {0: Window, window: Window, self: Window, document: document, name: '', location: Location, …}
+
+                ------------
+                const person = {
+                    name : '이이름',
+                    age: 40,
+                    showInfo: function () {
+                        console.log("showinfo, this", this);
+                        const inner = () => {
+                            console.log("showinfo, this", this);
+                    };
+                    inner();
+                    }
+                };
+
+                person.showInfo();
+                VM2731:5 showinfo, this {name: '이이름', age: 40, showInfo: ƒ}
+                VM2731:7 showinfo, this {name: '이이름', age: 40, showInfo: ƒ}
+
+
 6. 참조에 의한 호출과 값에 의한 호출
 
 변수의 유효범위
@@ -78,9 +183,91 @@ Object : 사물, 대상
 3. 함수 안에서 변수 선언과 변수 끌어올림
 4. 함수 안에서 변수 선언 생략
 5. 블록 유효 범위 : let과 const
+    var : 전역변수의 오염문제가 발생 (함수 범위의 지역변수)
+
+    지역의 범위를  {...} 한정
+    let : 값을 변경할 수 있는 변수 앞에 선언 
+
+    const : 상수(값을 변경 할수 없음.) 앞에 선언. 
+
+    참고) variable : 변수 -> 값 변경 가능
+           
+    - 값을 저장할 변수를 선언할때 기본적으로 const로 선언하고, 
+      값 변경이 필요할때만 let으로 선언자를 변경(권장사항)
+
 6. 함수 리터럴로 함수 정의하기
 7. 객체의 메서드
 8. 즉시 실행 함수
 9. 가변길이 인수 목록(Arguments 객체)
 
 생성자
+
+
+
+
+
+
+
+var result = add(10,20);
+console.log(result);
+
+var add = function(num1, num2){
+    var result = num1 + num2 ;
+    return result;
+};
+
+>> Uncaught TypeError: add is not a function
+at <anonymous>:1:14
+
+
+
+===========
+함수를 매개변수로 쓰는 예
+
+const nums = [1,2,3,4,5,6,7,8,9,10];
+function process(currentValue){
+    return currentValue * currentValue;
+}
+const nums2 = nums.map(process);
+nums2;
+
+=============================
+
+function map(callback, items){
+    const converted = [];
+    for (const item of items){
+        const value = callbackFn(item);
+        converted.push(value);
+    }
+
+    return converted;
+}
+
+const nums = [1,2,3,4,5,6,7,8,9,10];
+function process(currentValue){
+    console.log("currentValue", currentValue);
+    
+    return currentValue * currentValue;
+}
+
+const num2 = map(process, nums);
+num2;
+
+
+
+======== 줄이기
+
+const nums3 = nums.map(function process(value){
+    return value * value;
+});
+
+============ 익명으로 줄이기
+
+const nums2 = nums.map(function(value){
+    return value * value;
+});
+
+============== 화살표함수로 줄이기
+
+const nums3 = nums.map(v => v * v);
+
