@@ -196,17 +196,213 @@ inner EC(Execution Context) {
       값 변경이 필요할때만 let으로 선언자를 변경(권장사항)
 
 6. 함수 리터럴로 함수 정의하기
+    const add = function (...){...};
+    - 함수가 정의된 코드 다음부터 add 함수 호출가능!
+
+
 7. 객체의 메서드
-8. 즉시 실행 함수
+    - 객체 안에 함수가 정의되어 있으면 메서드 라는 용어를 사용하기도 함.
+    - 함수와 메서드를 용어적인 구분을 할 필요는 없다!
+
+8. 즉시 실행 함수 ********
+    - 함수를 정의하는 동시에 실행하는 방법
+    
+    (function(){
+        // 즉시 실행할 코드
+    })();
+    
+    ------------------------
+    
+    const add = (function(a,b){
+        colsole.log(a+b);
+        return  a+b // 예약어도 사용 가능!
+    })(10,20);
+
+    
 9. 가변길이 인수 목록(Arguments 객체)
+    인수(Parameter) : 매개변수
+    인자(Argument) : 매개변수에 대입된 값
 
-생성자
+    모든 함수에는 arguments라는 지역변수가 생성
+    - 함수를 호출했을때 매개변수에 사용된 값
+    - 가변적인 매개변수의 함수를 정의할때 사용될 수 있음.
+
+    function add(num1, num2){
+        console.log(arguments);
+    }
+
+    add(10,20);
+    Arguments(2) [10, 20, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+=============
+
+    function sum(...args) { // 가변적인 매개변수
+        let total = 0;
+        for (const num of arguments){
+            total += num;
+        }
+        return total;
+    }
+
+    sum(10, 20);
+    30
+    sum(10, 20, 30);
+    60
+===================
+
+    function sum(num1, num2, ...params) {
+        console.log("num1", num1, "num2",num2);
+        console.log("params", params);
+    }
+
+    sum(10, 20, 30, 40, 50);
+    num1 10 num2 20
+    params (3) [30, 40, 50]
+
+
+참고)
+    ...변수명  1) 가변 매개변수 ****
+              2) 전개 연산자   나중에
+              3) 나머지 연산자  나중에
+
+
+생성자 ******
+    - 함수 객체
+    - 객체를 생성하는 함수
+    - new : 메모리 상에 어떤 공간을 생성하는 경우
+    - 객체를 생성하는 과정 ******
+        1) 생성자 함수의 prototype 객체를 상속
+        2) 생성자 함수의 this 값을 생성될 객체의 주소로 변경해서 호출, 
+        초기화(최초로 객체 값을 지정하는 것)
+
+    - 생성자 함수 객체간 상속(생성자 함수의 prototype 객체간의 상속)
+    - 복잡함 있음!
+        ㄴ 클래스 구문이 추가 됨(클래스가 절대 아님!, 생성자 함수 객체)
+
+
+    // 타원의 면적을 구하는 함수
+        function Ellipse(a, b){ 
+            this.a = a;
+            this.b = b;
+        };
+
+        Ellipse.prototype.area = function(){
+            return this.a * this.b * Math.PI;
+        };
+
+
+        function Circle(r) {                        
+            this.a = r;                             
+            this.b = r;
+        }
+
+        Circle.prototype.__proto__ = Ellipse.prototype;
+
+        console.dir(Circle);
+
+        const c1 = new Circle(10);
+
+===============
+function Circle(r) {                        
+    this.a = r;                             
+    this.b = r;
+}
+>> 아래처럼 쓸 수도 있음.
+function Circle(r){
+    Ellipse.call(this,r,r);
+}
+
+
+///// class로
+
+class Person {
+    constructor(name, age){
+        this.name = name;
+        this.age = age;
+    }
+    static staticMethod(){
+        console.log("정적 메서드!");
+    }
+    showinfo(){
+        console.log('name', this.name, 'age', this.age);
+    }
+}
+
+console.dir(Person);
+
+====================
+
+class Ellipse {
+    constructor(a, b){
+        this.a = a;
+        this.b = b;
+    }
+    area(){
+        return this.a * this.b * Math.PI;
+    }
+}
+
+class Circle extends Ellipse {
+    constructor(r){
+        super(r,r);
+    }
+}
+
+const c1 = new Circle(10);
+
+c1.area();
+314.1592653589793
+c1;
+Circle {a: 10, b: 10}
 
 
 
+상속 ******
+    부모, 상위 객체의 자원을 하위 객체가 공유할 수 있도록 하는 것!
+        - 객체간의 상속
+        - 프로토타입 체인의 연결을 통한 객체간의 상속!
+
+        모든 객체에 있는 속성
+        [[Prototype]] : 프로토타입 체인, 상속 관계를 나타낸다. 상속 관계인 객체의 자원은 하위 객체가 공유할 수 있다.
+        __proto__ 속성 : 프로토타입 체인 연결 변경 속성
+
+            const objA = {num1: 10, num2: 20};
+            const objB = {num3: 30, num4: 40};
+
+            objB.__proto__ = objA; // objB 가 objA를 상속
+
+            objB;   // num1, num2 접근가능
+            {num3: 30, num4: 40}num3: 30num4: 40[[Prototype]]: Objectnum1: 10num2: 20[[Prototype]]: Object
+
+참고)
+    function add (num1, num2) {
+        return num1 + num2;
+    }
+    -> const add = new Function('num1,num2', 'return num1 + num1');
+    -> 모든 함수는 Function.prototype을 상속 받고 있다.
+    -> 모든 함수는 Function.prototype이 가지고 있는 함수, 속성들을 사용할 수 있다.
+
+참조 변수 instanceof 생성자 함수명
+    -> 객체가 지정된 생성자 함수로 부터 생성된 객체인가?(프로토타입 체인을 체크...)
+    
+    const aa = [1,2,3,4];
+    aa instanceof Array;
+    true
 
 
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    Person.prototype.showinfo  = function () {
+        console.log('name', this.name, 'age', this.age);
+    };
+    const p1 = new Person('이이름', 20);
 
+    const p2 = new Person('김이름', 30);
+
+    p1.showinfo === p2.showinfo;
+    true
+===========================        
 
 var result = add(10,20);
 console.log(result);
