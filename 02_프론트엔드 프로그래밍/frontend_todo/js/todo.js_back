@@ -1,7 +1,6 @@
 const todo = {
   items: [], // 스케줄 목록
   tpl: null, // 목록 템플릿,
-  quill: null, 
   /**
    * 로드 초기에 실행될 부분 정의
    *
@@ -9,10 +8,9 @@ const todo = {
    * 2. localStorage에 저장된 todos 항목 내용을 this.items에 업데이트 해주고
    * 3. 스케줄 목록 출력
    */
-  init(quillInstance) {
+  init() {
     // 목록 템플릿 가져오기
     this.tpl = document.getElementById('tpl').innerHTML
-    this.quill = quillInstance
 
     const data = localStorage.getItem('todos')
     this.items = data ? JSON.parse(data) : []
@@ -124,7 +122,7 @@ const todo = {
           frmRegist.title.value = title
 
           const htmlContent = el.querySelector('.schedule-content')?.innerHTML || ''
-          this.quill.clipboard.dangerouslyPasteHTML(htmlContent)
+          quill.clipboard.dangerouslyPasteHTML(htmlContent)
 
           frmRegist.dataset.editing = seq
 
@@ -143,13 +141,14 @@ const todo = {
   
 }
 
+let quill // 전역에 선언
 window.addEventListener('DOMContentLoaded', function () {
-  const quill = new Quill('#todo-content', {
+  quill = new Quill('#todo-content', {
     theme: 'bubble',
   })
 
   // 스케줄 목록 불러오기
-  todo.init(quill)
+  todo.init()
 
   /**
    * 스케줄 등록 처리
@@ -186,10 +185,10 @@ window.addEventListener('DOMContentLoaded', function () {
       }
     }
 
-    if (!todo.quill.getText().trim()) {
+    if (!quill.getText().trim()) {
       errors.push('내용을 입력하세요.')
     } else {
-      item.content = todo.quill.root.innerHTML.trim()
+      item.content = quill.root.innerHTML.trim()
     }
 
     // 검증실패한 경우 에러메세지 출력 및 실행 중단
@@ -226,7 +225,7 @@ window.addEventListener('DOMContentLoaded', function () {
     //todo.add(item)
 
     // 등록 완료 후 초기화
-    todo.quill.root.innerHTML = ''
+    quill.root.innerHTML = ''
     frmRegist.title.value = ''
     frmRegist.date.value = ''
   })
