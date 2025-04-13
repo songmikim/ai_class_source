@@ -76,7 +76,7 @@ const todo = {
    *
    */
   render() {
-    const targetEl = document.getElementById('schdule-items')
+    const targetEl = document.getElementById('schedule-items')
     targetEl.innerHTML = `<div class="spinner d-flex justify-content-center mt-5 mb-10">
                     <div class="spinner-grow text-success" role="status">
                         <span class="visually-hidden">등록된 스케줄을 조회하고 있습니다.</span>
@@ -113,13 +113,37 @@ const todo = {
           }
         })
         // 삭제 버튼 이벤트 처리 E
+
+        // 수정 버튼 이벤트 처리 S
+        const editEl = el.querySelector('.edit')
+        editEl.addEventListener('click', () => {
+          // 해당 항목 내용 폼에 채워넣기
+          frmRegist.date.value = date
+          frmRegist.title.value = title
+
+          const htmlContent = el.querySelector('.schedule-content')?.innerHTML || ''
+          quill.clipboard.dangerouslyPasteHTML(htmlContent)
+
+          frmRegist.dataset.editing = seq
+
+            // 버튼 텍스트 변경
+          const submitBtn = document.getElementById('submit-btn')
+          submitBtn.textContent = '수정 완료'
+        })
+        
+        const submitBtn = document.getElementById('submit-btn')
+        submitBtn.textContent = '등록하기' // 텍스트 복구
+
+        // 수정 버튼 이벤트 처리 E
       })
     }, 1500)
   },
+  
 }
 
+let quill // 전역에 선언
 window.addEventListener('DOMContentLoaded', function () {
-  const quill = new Quill('#todo-content', {
+  quill = new Quill('#todo-content', {
     theme: 'bubble',
   })
 
@@ -181,12 +205,29 @@ window.addEventListener('DOMContentLoaded', function () {
     }
     // 유효성 검사 E
 
+    const editingSeq = frmRegist.dataset.editing
+
+    if (editingSeq) {
+      // 수정 모드
+      const index = todo.items.findIndex(i => i.seq == editingSeq)
+      if (index !== -1) {
+        todo.items[index] = { ...todo.items[index], ...item, seq: Number(editingSeq) }
+        todo.save()
+        todo.render()
+      }
+      delete frmRegist.dataset.editing // 수정 모드 종료
+    } else {
+      // 등록 모드
+      todo.add(item)
+    }
+
     // 검증 성공한 경우 등록 처리
-    todo.add(item)
+    //todo.add(item)
 
     // 등록 완료 후 초기화
     quill.root.innerHTML = ''
     frmRegist.title.value = ''
     frmRegist.date.value = ''
   })
+  
 })
