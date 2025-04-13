@@ -1,0 +1,78 @@
+Microsoft Windows [Version 10.0.26100.3476]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\rlath>docker pull nginx
+Using default tag: latest
+latest: Pulling from library/nginx
+e81a6b82cf64: Pull complete
+75b642592991: Pull complete
+3dce86e3b082: Pull complete
+3b6e18ae4ce6: Pull complete
+553c8756fd66: Pull complete
+10fe6d2248e3: Pull complete
+8a628cdd7ccc: Pull complete
+Digest: sha256:09369da6b10306312cd908661320086bf87fbae1b6b0c49a1f50ba531fef2eab
+Status: Downloaded newer image for nginx:latest
+docker.io/library/nginx:latest
+
+C:\Users\rlath>docker images
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+nginx        latest    09369da6b103   2 months ago   279MB
+
+C:\Users\rlath>docker run --name todo -p 3000:80 -d nginx
+f330f7482669d09082c8499ffef65b6808c95131c318d44f99b4236e9eb3d530
+
+C:\Users\rlath>docker ps -a
+CONTAINER ID   IMAGE     COMMAND                   CREATED          STATUS          PORTS                  NAMES
+f330f7482669   nginx     "/docker-entrypoint.…"   13 seconds ago   Up 12 seconds   0.0.0.0:3000->80/tcp   todo
+
+C:\Users\rlath>cd C:\Users\rlath\Desktop\김송미\02_프론트엔드 프로그래밍\frontend_todo
+
+C:\Users\rlath\Desktop\김송미\02_프론트엔드 프로그래밍\frontend_todo>dir /w
+ C 드라이브의 볼륨: OS
+ 볼륨 일련 번호: 909D-9DD1
+
+ C:\Users\rlath\Desktop\김송미\02_프론트엔드 프로그래밍\frontend_todo 디렉터리
+
+[.]          [..]         [css]        index.html   [js]         README.md
+               2개 파일               5,478 바이트
+               4개 디렉터리  836,243,095,552 바이트 남음
+
+C:\Users\rlath\Desktop\김송미\02_프론트엔드 프로그래밍\frontend_todo>docker cp index.html todo:/usr/share/nginx/html/
+Successfully copied 6.66kB to todo:/usr/share/nginx/html/
+
+C:\Users\rlath\Desktop\김송미\02_프론트엔드 프로그래밍\frontend_todo>docker cp todo:/usr/share/nginx/html/
+docker: 'docker cp' requires 2 arguments
+
+Usage:  docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-
+        docker cp [OPTIONS] SRC_PATH|- CONTAINER:DEST_PATH
+
+Run 'docker cp --help' for more information
+
+C:\Users\rlath\Desktop\김송미\02_프론트엔드 프로그래밍\frontend_todo>docker cp css/ todo:/usr/share/nginx/html/
+Successfully copied 2.56kB to todo:/usr/share/nginx/html/
+
+C:\Users\rlath\Desktop\김송미\02_프론트엔드 프로그래밍\frontend_todo>docker cp js/ todo:/usr/share/nginx/html/
+Successfully copied 16.4kB to todo:/usr/share/nginx/html/
+
+C:\Users\rlath\Desktop\김송미\02_프론트엔드 프로그래밍\frontend_todo>docker commit -m "배포 이미지 생성" todo ksm0200/todo:2.0.0
+sha256:508db5dc7ad375229dd16f48cd3f8ea07ef84ef0313232928199bfc1c7ead104
+
+C:\Users\rlath\Desktop\김송미\02_프론트엔드 프로그래밍\frontend_todo>docker images
+REPOSITORY     TAG       IMAGE ID       CREATED          SIZE
+ksm0200/todo   2.0.0     508db5dc7ad3   17 seconds ago   279MB
+nginx          latest    09369da6b103   2 months ago     279MB
+
+C:\Users\rlath\Desktop\김송미\02_프론트엔드 프로그래밍\frontend_todo>docker push ksm0200/todo:2.0.0
+The push refers to repository [docker.io/ksm0200/todo]
+10fe6d2248e3: Mounted from library/nginx
+3dce86e3b082: Mounted from library/nginx
+e81a6b82cf64: Mounted from library/nginx
+6b949d6a9835: Pushed
+75b642592991: Mounted from library/nginx
+8a628cdd7ccc: Mounted from library/nginx
+3b6e18ae4ce6: Mounted from library/nginx
+553c8756fd66: Mounted from library/nginx
+2.0.0: digest: sha256:508db5dc7ad375229dd16f48cd3f8ea07ef84ef0313232928199bfc1c7ead104 size: 2038
+
+C:\Users\rlath\Desktop\김송미\02_프론트엔드 프로그래밍\frontend_todo>^AC:\Users\rlath\Desktop\김송미\02_프론트엔드 프로그래밍\frontend_todo

@@ -53,10 +53,12 @@ const todo = {
   remove(seq) {
     // 등록된 seq번호를 찾아서 등록된 스케줄 제거
     const index = this.items.findIndex((item) => item.seq === seq)
-    if (index !== -1) {
+    if (index === -1) return
+
       this.items.splice(index, 1)
+
+      // 스케줄 저장 처리리
       this.save()
-    }
 
     // 목록 갱신
     this.render()
@@ -144,7 +146,7 @@ const todo = {
 }
 
 window.addEventListener('DOMContentLoaded', function () {
-  const quill = new Quill('#todo-content', {
+  const quill = new Quill('#todo-content', { // 위지윅 에디터
     theme: 'bubble',
   })
 
@@ -177,7 +179,7 @@ window.addEventListener('DOMContentLoaded', function () {
     for (const [field, message] of Object.entries(requiredFields)) {
       const value =
         typeof frmRegist[field].value === 'string'
-          ? frmRegist[field].value?.trim()
+          ? frmRegist[field].value.trim()
           : ''
       if (!value) {
         errors.push(message)
