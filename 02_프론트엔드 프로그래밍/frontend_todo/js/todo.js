@@ -65,6 +65,7 @@ const todo = {
   },
 
   /**
+   * 
    * 스케줄 저장 처리
    *
    *   this.items에 저장된 내용을
@@ -213,11 +214,11 @@ window.addEventListener('DOMContentLoaded', function () {
     if (editingSeq) {
       // 수정 모드
       const index = todo.items.findIndex(i => i.seq == editingSeq)
-      if (index !== -1) {
+      if (index === -1) return;
         todo.items[index] = { ...todo.items[index], ...item, seq: Number(editingSeq) }
         todo.save()
         todo.render()
-      }
+      
       delete frmRegist.dataset.editing // 수정 모드 종료
     } else {
       // 등록 모드
