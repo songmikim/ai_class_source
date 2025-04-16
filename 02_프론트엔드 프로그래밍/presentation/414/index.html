@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0m">
+    <title>AI와의 공존을 위해 필요한 일</title>
+    <link rel="stylesheet"  type="text/css" href="css/style.css">
+    <script src="js/script.js" defer></script>
+
+</head>
+<body>
+    <header class="header">
+        <ul class="clear">
+            <li><a href="#"><img class="logo" src="img/logo.png">토론 게시판</a></li>
+            <li><span class="subject">AI와의 공존을 위해 필요한 일</span></li>  
+        </ul>
+    </header>
+    
+
+    <div class="accordion-item" id="schedule-item-#{seq}">
+    </div>
+
+
+    <div class="write">
+        <div>
+        <form name="frmBoard">
+            <input type="text" name="user" id="user" placeholder="닉네임">
+            <input type="textarea" name="content" id="content" placeholder="내용을 입력하세요.">
+            <button type="submit" id="submit">저장</button>
+        </form>
+        </div>
+    </div>
+
+    <script type="text/html" id="tpl">
+        <div class="accordion-item" id="schedule-item-#{seq}">
+            <div class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#schedule-item#{seq}" aria-expanded="true" aria-controls="schedule-item#{seq}">
+                    <span class="badge text-bg-info me-2">#{date}</span>
+                    #{user}
+                </button>
+            </div>
+            <div id="schedule-item#{seq}" class="accordion-collapse collapse" data-bs-parent="#schedule-items">
+                <div class="accordion-body">
+                    #{content}
+                    <button type="button" class="btn btn-danger btn-sm remove" data-seq="#{seq}">삭제</button>
+                </div>
+            </div>
+        </div>
+    </script>
+
+
+    <footer class="footer">
+        <span>&copy;2025-04-14 all right reserved</span>
+    </footer>
+</body>
+</html>
