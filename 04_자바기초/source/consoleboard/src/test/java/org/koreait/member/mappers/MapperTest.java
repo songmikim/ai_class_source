@@ -3,9 +3,6 @@ package org.koreait.member.mappers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.koreait.global.configs.DBConn;
-import org.koreait.member.entities.Member;
-
-import java.util.List;
 
 public class MapperTest {
     private MemberMapper mapper;
@@ -40,7 +37,7 @@ public class MapperTest {
 
         mapper.delete("user01@test.org");
 
-        List<Member> members = mapper.getList();
-        members.forEach(System.out::println);    // 전체 조회
+        //List<Member> members = mapper.getList();
+        //members.forEach(System.out::println);    // 전체 조회
     }
 }

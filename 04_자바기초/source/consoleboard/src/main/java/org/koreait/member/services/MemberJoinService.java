@@ -21,12 +21,18 @@ public class MemberJoinService {
         validator.check(form);
 
         String hash = BCrypt.hashpw(form.getPassword(), BCrypt.gensalt(12));
+        String mobile = form.getMobile();
+        
+        // 휴대전화 번호는 숫자외 문자는 모두 제거
+        if(mobile != null && !mobile.isBlank()){
+            mobile =  mobile.replaceAll("\\D", "");
+        }
 
         Member member = new Member();
         member.setEmail(form.getEmail());
         member.setPassword(hash);
         member.setName(form.getName());
-        member.setMobile(form.getMobile());
+        member.setMobile(mobile);
         member.setTerms(form.isTerms());
 
         mapper.register(member);
