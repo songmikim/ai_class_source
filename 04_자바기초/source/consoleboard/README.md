@@ -10,7 +10,7 @@ FLUSH PRIVILEGES;  -- 권한반영
 -- dbeaver
 driver properties > allowPublicKeyRetrieval true 설정
 
-CREATE TABLE MEMBER(
+CREATE TABLE member(
 seq INT AUTO_INCREMENT,
 email VARCHAR(65) NOT NULL UNIQUE,
 password VARCHAR(65) NOT NULL,
@@ -76,15 +76,32 @@ CREATE TABLE member (
 	PRIMARY KEY(seq)
 );
 
-CREATE TABLE BOARD_DATA (
-	seq BIGINT AUTO_INCREMENT,
-	poster VARCHAR(45) NOT NULL,
-	subject VARCHAR(255) NOT NULL,
-	content TEXT NOT NULL,
-	regDt DATETIME DEFAULT CURRENT_TIMESTAMP,
-	modDt DATETIME, 
-	PRIMARY KEY(seq)
+CREATE TABLE board (
+    seq BIGINT AUTO_INCREMENT,
+    posterId INT NOT NULL,
+    subject VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    regDt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    modDt DATETIME, 
+    PRIMARY KEY(seq),
+    FOREIGN KEY (posterId) REFERENCES member(seq)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
+
+
+CREATE TABLE board (
+    seq BIGINT AUTO_INCREMENT,
+    posterId INT NOT NULL,
+    subject VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    regDt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    modDt DATETIME, 
+    PRIMARY KEY(seq),
+    FOREIGN KEY (posterId) REFERENCES member(seq)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);  
 ```
 
 # 암호화
