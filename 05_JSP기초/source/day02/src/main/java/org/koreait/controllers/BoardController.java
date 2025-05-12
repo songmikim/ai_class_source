@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 
 public class BoardController extends HttpServlet {
 
@@ -53,15 +54,14 @@ public class BoardController extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
-        System.out.println("doGet() 호출(매 요청마다 호출");
-        req.setCharacterEncoding("UTF-8"); // 서블릿 5
-        String subject =  req.getParameter("subject");
-        String content =  req.getParameter("content");
-        String category =  req.getParameter("category");
+
+        req.setCharacterEncoding("UTF-8"); // 서블릿 5버전 이하
+        String subject = req.getParameter("subject");
+        String content = req.getParameter("content");
+        String category = req.getParameter("category");
         String[] categories = req.getParameterValues("category");
 
-      //  System.out.printf("subject=%s, content=%s%n", subject, content);
-      //  System.out.printf("category=%s, categories=%s%n",category, Arrays.toString(categories));
+        System.out.printf("subject=%s, content=%s%n", subject, content);
+        System.out.printf("category=%s, categories=%s%n", category, Arrays.toString(categories));
     }
 }
