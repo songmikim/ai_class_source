@@ -22,5 +22,14 @@ public class Ex03 {
     void test1(){
         long result = calculator.factorial(10L);
         System.out.printf("result:%d%n", result);
+
+        result = calculator.factorial(10L);
+        System.out.printf("result:%d%n", result);
+
+        result = calculator.factorial(10L);
+        System.out.printf("result:%d%n", result);
+
+        result = calculator.factorial(10L);
+        System.out.printf("result:%d%n", result);
     }
 }
