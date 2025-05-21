@@ -1,13 +1,17 @@
 package org.koreait.member.controllers;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.koreait.global.test.comtrollers.RequestLogin;
+import org.koreait.member.entities.Member;
 import org.koreait.member.services.JoinService;
+import org.koreait.member.services.LoginService;
 import org.koreait.member.validators.JoinValidator;
-import org.koreait.member.validators.JoinValidator2;
+import org.koreait.member.validators.LoginValidator;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -17,6 +21,9 @@ public class MemberController {
 
     private final JoinValidator joinValidator;
     private final JoinService joinService;
+
+    private final LoginValidator loginValidator;
+    private final LoginService loginService;
 
     /**
      * MemberController에서 공통으로 공유할수 있는  속성
@@ -41,9 +48,8 @@ public class MemberController {
     }
 
     @PostMapping("/join")
-    public String joinPs(
-            @Valid RequestJoin form, Errors errors) { // requestJoin`
-       // joinValidator.validate(form, errors);
+    public String joinPs(@Valid RequestJoin form, Errors errors) { // requestJoin`
+        joinValidator.validate(form, errors);
 
         if (errors.hasErrors()) { // 검증 실패
             return "member/join";
@@ -57,20 +63,49 @@ public class MemberController {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String login(@ModelAttribute RequestLogin form, @CookieValue(name = "saveEmail", required = false) String email) {
+
+        if(email != null){
+            form.setEmail(email);
+            form.setSaveEmail(true);
+        }
 
         return "member/login";
     }
 
     @PostMapping("/login")
-    public String loginPs() {
+    public String loginPs(@Valid RequestLogin form, Errors errors) {
 
-        return "member/login";
+        loginValidator.validate(form, errors);
+
+        if (errors.hasErrors()) {
+            return "member/login";
+        }
+
+        // 검증 성공시 로그인 처리
+        loginService.process(form);
+
+        // 로그인 성공시 이동
+        String redirectUrl = form.getRedirectUrl();
+
+        return "redirect:" + (StringUtils.hasText(redirectUrl) ? redirectUrl : "/");
+
     }
 
-    // Membercontroller 공통적용 Validator
-/*    @InitBinder
-    public void InitBinder(WebDataBinder binder){
-        binder.setValidator(joinValidator);
-    }*/
+    @RequestMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();   // 세션비우기
+        return "redirect:/member/login";
+    }
+
+    @ResponseBody
+    @GetMapping("/info")
+    public void memberInfo(@SessionAttribute(name = "loggedMember", required = false)Member member){
+        System.out.println(member);
+    }
+    // MemberController 공통 적용 Validator
+//    @InitBinder
+//    public void InitBinder(WebDataBinder binder) {
+//        binder.setValidator(joinValidator);
+//    }
 }

@@ -14,7 +14,7 @@
 --%>
 
 <form:form action="${action}" modelAttribute="requestJoin">
-    <form:errors    />
+    <form:hidden path="redirectUrl" />
     <dl>
         <dt>
             <spring:message code="이메일" />
