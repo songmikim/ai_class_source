@@ -1,8 +1,11 @@
 package org.koreait.global.configs;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
@@ -36,6 +39,16 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.jsp("/WEB-INF/templates/", ".jsp");
     }
 
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer configurer(){
+        PropertySourcesPlaceholderConfigurer configurer = new PropertySourcesPlaceholderConfigurer();
+
+        String profile = System.getenv("string.profiles.active");
+        String configFile = profile != null && profile.equals("prod") ? "application-prod" : "application";
+
+        configurer.setLocations(new ClassPathResource(configFile + ".properties"));
+        return configurer;
+    }
 /*    @Override
     public Validator getValidator() {   // 전역 Validator
         return joinValidator;

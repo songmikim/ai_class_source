@@ -5,14 +5,22 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.koreait.global.test.comtrollers.RequestLogin;
 import org.koreait.member.entities.Member;
+import org.koreait.member.exceptions.MemberNotFoundException;
+import org.koreait.member.repositories.MemberRepository;
 import org.koreait.member.services.JoinService;
 import org.koreait.member.services.LoginService;
 import org.koreait.member.validators.JoinValidator;
 import org.koreait.member.validators.LoginValidator;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/member")
@@ -24,6 +32,8 @@ public class MemberController {
 
     private final LoginValidator loginValidator;
     private final LoginService loginService;
+
+    private final MemberRepository repository;
 
     /**
      * MemberController에서 공통으로 공유할수 있는  속성
@@ -103,6 +113,55 @@ public class MemberController {
     public void memberInfo(@SessionAttribute(name = "loggedMember", required = false)Member member){
         System.out.println(member);
     }
+
+    @GetMapping("/list")
+    public String memberList(@ModelAttribute @Valid MemberSearch search, Errors errors, Model model){
+        LocalDate sDate = Objects.requireNonNullElse( search.getSDate(), LocalDate.now());
+        LocalDate eDate = Objects.requireNonNullElse( search.getEDate(), LocalDate.now());
+
+        LocalDateTime _sDate = sDate.atStartOfDay();    // 지정된 날짜의 자정
+        LocalDateTime _eDate = eDate.atTime(23,59,59);
+
+        List<Member> items = repository.findByRegDtBetween(_sDate, _eDate);
+        model.addAttribute("items", items);
+
+        return "member/list";
+    }
+
+    @ResponseBody
+    @GetMapping({"/view/{seq}","/view/info/{email}"})
+    public void view(@PathVariable(name = "seq", required = false) Long mSeq,
+                     @PathVariable(name = "email", required = false) String email){
+
+        System.out.println("seq:" + mSeq);
+        System.out.println("email:" + email);
+
+        if(StringUtils.hasText(email)){
+            Member member = repository.findByEmail(email).orElseThrow(MemberNotFoundException::new );
+            System.out.println(member);
+        }
+    }
+
+    //@ResponseStatus(HttpStatus.NOT_FOUND)
+   /* 공통으로 이동시킴 > CommonControllerAdvice
+    @ExceptionHandler(Exception.class)
+    public ModelAndView errorHandler(Exception e, Model model){
+        model.addAttribute("message", e.getMessage());
+
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+
+        if(e instanceof CommonException commonException){
+            status = commonException.getStatus();
+        }
+
+        e.printStackTrace();
+
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("error/error");
+        mv.setStatus(status);
+        return mv;
+    }*/
+
     // MemberController 공통 적용 Validator
 //    @InitBinder
 //    public void InitBinder(WebDataBinder binder) {
