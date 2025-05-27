@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>따라쓰기 도우미</title>
+  <style>
+    body {
+      font-family: 나눔고딕;
+      padding: 20px;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      margin-bottom: 20px;
+    }
+    .input-line {
+      position: relative;
+      margin-bottom: 10px;
+    }
+    .ghost-text {
+      position: absolute;
+      top: 9px;
+      left: 9px;
+      color: gray;
+      pointer-events: none;
+      white-space: pre-wrap;
+      font-size: 1em;
+      letter-spacing: normal;
+    }
+    .real-input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      background: transparent;
+      color: black;
+      caret-color: black;
+      position: relative;
+      font-size: 1em;
+      letter-spacing: normal;
+    }
+  </style>
+</head>
+<body>
+  <h2>따라쓰기 도우미</h2>
+  <textarea id="inputText" placeholder="여기에 텍스트를 붙여넣으세요 (줄 단위로)"></textarea>
+  <button onclick="generateInputs()">생성하기</button>
+
+  <div id="output"></div>
+
+  <script>
+    function generateInputs() {
+      const output = document.getElementById('output');
+      output.innerHTML = ''; // 이전 내용 초기화
+
+      const lines = document.getElementById('inputText').value.split('\n');
+
+      lines.forEach(line => {
+        const container = document.createElement('div');
+        container.className = 'input-line';
+
+        const ghost = document.createElement('div');
+        ghost.className = 'ghost-text';
+        ghost.textContent = line;
+
+        const input = document.createElement('input');
+        input.className = 'real-input';
+        input.type = 'text';
+
+        container.appendChild(ghost);
+        container.appendChild(input);
+        output.appendChild(container);
+      });
+    }
+  </script>
+</body>
+</html>
