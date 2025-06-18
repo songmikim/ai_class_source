@@ -9,7 +9,7 @@
 import News from "./components/News";
 
 const App = () => {
-  return <Todo />;
+  return <News />;
 }
 
 export default App;

@@ -1,0 +1,38 @@
+자바스크립트 이벤트 처리의 주요 내용:
+1. 이벤트 리스너 추가/제거⁠
+    - addEventListener(이벤트명, 핸들러함수, 캡처링여부)
+	- removeEventListener로 제거
+
+2. 주요 이벤트 종류⁠
+    - 마우스: mouseenter, mouseleave
+    - 키보드: keypress, keydown, keyup
+
+3. 이벤트 제어⁠
+    - stopPropagation(): 이벤트 전파 취소
+    - preventDefault(): 기본 동작 취소
+
+4. DOM 요소 선택 방법⁠
+   - getElementById: ID로 단일 요소 선택
+   - getElementsByClassName: 클래스로 다중 선택
+   - querySelector/querySelectorAll: CSS 선택자 사용
+
+5. 이벤트의 단계
+    1) 캡펴링 단계
+    2) 타깃 단계 
+    3) 버블링 단계
+
+addEventListener를 사용해서 얻을 수 있는 장점
+- 같은 요소의 같은 이벤트에 이벤트 리스너를 여러 개 등록할 수 있다.
+- 버블링 단계는 물론 캡처링 단계에서도 활용할 수 있다. 
+
+3. 이벤트 리스너 안의 this
+- event 
+	.target 
+	.currentTarget
+1) 이벤트 리스너 안의 this는 이벤트가 발생한 요소 객체
+2) this가 원하는 객체를 가리키도록 설정하는 방법
+- bind 메서드를 사용하는 방법
+- 익명 함수 안에서 실행하는 방법
+- 화살표 함수를 사용하는 방법
+- addEventListener의 두 번째 인수로 객체를 넘기는 방법
+	- handleEvent 

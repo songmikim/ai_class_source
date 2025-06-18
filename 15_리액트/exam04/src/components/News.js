@@ -6,7 +6,8 @@ const News = () => {
         fetch(
             'https://newsapi.org/v2/top-headlines? country=kr& category=business &apiKey=c39d1c861e5245cab8db477f24baed56',
         )
-        .then((res) => re)
+        .then((res) => res.json())
+        .then((items) => console.log(items));
     }, []);
     return <></>
 }
