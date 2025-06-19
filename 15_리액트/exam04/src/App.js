@@ -1,15 +1,22 @@
-// import Counter from './components/Counter';
-
+// import Counter2 from './components/Counter2';
 
 // const App = () => {
-//   return <Counter />
-// }
+//   return <Counter2 />;
+// };
 
-//import Todo from "./components/Todo";
-import News from "./components/News";
+// // import Todo from './components/Todo';
+
+// // const App = () => {
+// //   return <Todo />;
+// // };
+
+// export default App;
+
+
+import Average from "./components/Average";
 
 const App = () => {
-  return <News />;
+  return <Average />;
 }
 
 export default App;
