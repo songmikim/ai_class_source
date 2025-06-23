@@ -13,10 +13,18 @@
 // export default App;
 
 
-import Average from "./components/Average";
+// import Average from "./components/Average";
 
+// const App = () => {
+//   return <Average />;
+// }
+
+// export default App;
+
+
+import Counter3 from './components/Counter3';
 const App = () => {
-  return <Average />;
-}
+  return <Counter3 />;
+};
 
 export default App;
