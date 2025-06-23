@@ -1,6 +1,7 @@
 import { useState } from 'react'; // React의 useState 훅을 불러옴
 import TodoForm from '../components/TodoForm'; // 할 일 입력 폼 컴포넌트
 import TodoItems from '../components/TodoItems'; // 할 일 목록 컴포넌트
+import { produce } from 'immer';
 
 const TodoContainer = () => {
   const [form, setForm] = useState({}); // 입력 폼 상태
@@ -35,8 +36,13 @@ const TodoContainer = () => {
 
     if (hasErrors) return; // 에러가 있으면 함수 종료
 
-    setItems(items.concat({ ...form, id: Date.now() }));
+    //setItems(items.concat({ ...form, id: Date.now() }));
 
+    setItems(
+      produce((draft) => {
+        draft.push({  ...form, id: Date.now()})
+      }),
+    )
     // 입력 폼 초기화
     setForm({});
   };
@@ -58,7 +64,13 @@ const TodoContainer = () => {
 
   // 항목 개별 삭제
   const onRemove = (id) => {
-    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    //setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    const index = items.findIndex((item) => item.id === id);
+    setItems(
+      produce((draft) => {
+        draft.splice(index, 1, 0)
+      }),
+    )
   };
 
   // 체크된 항목들 일괄 삭제
