@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+// import SassComponent from "./sass/SassComponent";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+// function App() {
+//   return (
+//     <SassComponent />
+//   );
+// }
 
+// import CSSModule from "./sass/CSSModule/CSSModule";
+
+// const App = () =>{
+//   return <CSSModule />;
+// }
+
+// import MyComponent1 from './classNames/MyComponent1';
+
+// const App = () => {
+//   return <MyComponent1 />;
+// };
+
+import StyledComponent1 from './styled/StyledComponent1';
+
+const App = () => {
+  return <StyledComponent1 />;
+};
 export default App;
