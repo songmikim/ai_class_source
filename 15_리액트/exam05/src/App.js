@@ -18,9 +18,16 @@
 //   return <MyComponent1 />;
 // };
 
-import StyledComponent1 from './styled/StyledComponent1';
+// import StyledComponent1 from './styled/StyledComponent1';
+
+// const App = () => {
+//   return <StyledComponent1 />;
+// };
+
+import StyledComponent2 from './styled/StyledComponent2';
 
 const App = () => {
-  return <StyledComponent1 />;
+  return <StyledComponent2 />;
 };
+
 export default App;
