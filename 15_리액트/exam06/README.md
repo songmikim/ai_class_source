@@ -82,3 +82,23 @@ import { BrowserRouter } from 'react-router-dom';
     <BrowserRouter>
       <App />
     </BrowserRouter>
+
+
+
+
+
+    글작성: /board/write
+    글보기: /board/view
+    글목록: /board/list
+
+
+
+# 참고
+const qs = location.search.replace("?", "")
+                .split("&")
+                .reduce((acc, v) => {
+                    v = v.split("=");
+                    acc[v[0]] = v[1];
+
+                    return acc;
+                }, {});
