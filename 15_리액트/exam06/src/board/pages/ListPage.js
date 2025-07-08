@@ -7,11 +7,13 @@ const boardList = {
 };
 
 const ListPage = () => {
-    const [title, setTitle] =  useState();
-    const { bid } = useParams();
-        useEffect(() => {
-            setTitle(boardList[bid]);
-        }, [bid]);
+  const [title, setTitle] = useState();
+  const { bid } = useParams();
+
+  useEffect(() => {
+    setTitle(boardList[bid] ?? '없는 게시판!');
+  }, [bid]);
+
   return <h1>{title}</h1>;
 };
 

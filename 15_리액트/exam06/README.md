@@ -85,8 +85,6 @@ import { BrowserRouter } from 'react-router-dom';
 
 
 
-
-
     글작성: /board/write
     글보기: /board/view
     글목록: /board/list
@@ -102,3 +100,8 @@ const qs = location.search.replace("?", "")
 
                     return acc;
                 }, {});
+
+
+**** searchParams              
+
+# yarn add @loadable/component
