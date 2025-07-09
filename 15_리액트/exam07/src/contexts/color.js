@@ -1,9 +1,9 @@
-import { Children, createContext, useState } from 'react';
+import { createContext, useState } from 'react';
 
 // context 저장소 생성
 const ColorContext = createContext({});
 
-const ColorProvider = ({ Children }) => {
+const ColorProvider = ({ children }) => {
   const [color, setColor] = useState('black');
   const [subcolor, setSubcolor] = useState('red');
 
@@ -13,9 +13,12 @@ const ColorProvider = ({ Children }) => {
   };
 
   return (
-    <ColorContext.Provider value={value}>{Children}</ColorContext.Provider>
+    <ColorContext.Provider value={value}>{children}</ColorContext.Provider>
   );
 };
+
 const { Consumer: ColorConsumer } = ColorContext;
+
 export { ColorProvider, ColorConsumer };
+
 export default ColorContext;

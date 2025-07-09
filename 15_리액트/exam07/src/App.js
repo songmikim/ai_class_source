@@ -1,6 +1,7 @@
 import ColorBox from './components/ColorBox2';
+//import ColorContext from './contexts/color';
 import SelectColors from './components/SelectColors';
-import ColorContext, { ColorProvider } from './contexts/color';
+import { ColorProvider } from './contexts/color';
 
 const App = () => {
   return (
@@ -10,30 +11,28 @@ const App = () => {
     </ColorProvider>
   );
 };
-export default App;
 
 // const App = () => {
 //   return (
-//   <ColorContext.Provider value={{color: 'red'}}>
-//     <ColorBox />
-//   </ColorContext.Provider>
-//   )
-
+//     <ColorContext.Provider value={{ color: 'red' }}>
+//       <ColorBox />
+//     </ColorContext.Provider>
+//   );
 // };
-// export default App;
 
 // import RenderPropsEx from './components/RenderPropsEx';
+
 // const App = () => {
-//   // return <ColorBox />;
+//   //return <ColorBox />;
 //   return (
 //     <RenderPropsEx>
 //       {({color, ea}) => (
 //         <h1>
-//           color: {color}, ea:{ea}
+//           color: {color}, ea: {ea}
 //         </h1>
 //       )}
 //     </RenderPropsEx>
 //   );
 // };
 
-// export default App;
+export default App;
